@@ -17,6 +17,7 @@ kotlinxCoroutines = '1.7.3'
 kotlinxSerialization = '1.6.0'
 
 retrofit = '2.9.0'
+okhttp = '4.12.0'
 
 paging = "3.2.1"
 
@@ -46,6 +47,9 @@ hilt-android = { group = 'com.google.dagger', name = 'hilt-android', version.ref
 hilt-compiler = { group = 'com.google.dagger', name = 'hilt-android-compiler', version.ref = 'hilt' }
 
 retrofit = { group = 'com.squareup.retrofit2', name = 'retrofit', version.ref = 'retrofit' }
+retrofit-converter-gson = { group = 'com.squareup.retrofit2', name = 'converter-gson', version.ref = 'retrofit' }
+
+okhttp-logging-interceptor = { group = 'com.squareup.okhttp3', name = 'logging-interceptor', version.ref = 'okhttp' }
 
 paging-runtime = { group = 'androidx.paging', name = 'paging-runtime', version.ref = 'paging' }
 paging-compose = { group = 'androidx.paging', name = 'paging-compose', version.ref = 'paging' }
@@ -61,8 +65,8 @@ compose = [
     'androidx-compose-compiler', 'androidx-compose-navigation', 'androidx-hilt-navigation-compose',
     'androidx-compose-foundation'
 ]
-
 paging = ['paging-compose', 'paging-runtime']
+retrofit = ['retrofit', 'retrofit-converter-gson']
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'androidApplication' }
