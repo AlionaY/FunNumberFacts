@@ -1,7 +1,6 @@
 package com.example.funnumberfacts.db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,6 +16,6 @@ interface NumberFactDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToHistory(item: FactItem)
 
-    @Delete
-    fun deleteHistory()
+    @Query("DELETE FROM $NUMBER_FACTS_TABLE")
+    fun clearHistory()
 }
