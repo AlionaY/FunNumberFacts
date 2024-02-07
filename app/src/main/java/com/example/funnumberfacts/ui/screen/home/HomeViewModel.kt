@@ -57,10 +57,8 @@ class HomeViewModel @Inject constructor(
                     it.copy(screenState = ScreenState.Idle)
                 }
                 numberFactRepository.addFactToHistory(fact)
-                Log.d("$$$", "fact $fact")
             }.onFailure { error ->
                 updateScreenState(ScreenState.Error)
-                Log.d("$$$", "error $error")
             }
         }
     }
@@ -76,10 +74,8 @@ class HomeViewModel @Inject constructor(
                     it.copy(screenState = ScreenState.Idle)
                 }
                 numberFactRepository.addFactToHistory(fact)
-                Log.d("$$$", "fact $fact")
             }.onFailure { error ->
                 updateScreenState(ScreenState.Error)
-                Log.d("$$$", "error $error")
             }
         }
     }
