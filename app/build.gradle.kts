@@ -70,7 +70,7 @@ dependencies {
 
     implementation(libs.okhttp.logging.interceptor)
 
-    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)

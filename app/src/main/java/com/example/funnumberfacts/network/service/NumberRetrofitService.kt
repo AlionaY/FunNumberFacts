@@ -6,8 +6,8 @@ import retrofit2.http.Path
 
 interface NumberRetrofitService {
     @GET("{number}?json")
-    fun getFactAboutNumber(@Path("number") number: Int): FactResponse
+    suspend fun getFactAboutNumber(@Path("number") number: Int): FactResponse
 
     @GET("random/math?json")
-    fun getRandomFact(): FactResponse
+    suspend fun getRandomFact(): FactResponse
 }
