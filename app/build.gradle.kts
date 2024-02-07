@@ -59,16 +59,18 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.bundles.paging)
     implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.room)
 
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.lifecycle.ktx)
     implementation(libs.androidx.core.ktx)
 
     kapt(libs.hilt.compiler)
-
     implementation(libs.hilt.android)
 
     implementation(libs.okhttp.logging.interceptor)
+
+    annotationProcessor(libs.room.compiler)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)

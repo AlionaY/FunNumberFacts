@@ -14,15 +14,18 @@ androidxComposeFoundation = '1.6.0'
 
 kotlinxCoroutines = '1.7.3'
 kotlinxSerialization = '1.6.0'
-retrofitJsonSerializationConverter = '1.0.0'
 
+retrofitJsonSerializationConverter = '1.0.0'
 retrofit = '2.9.0'
+
 okhttp = '4.12.0'
 
-paging = "3.2.1"
+room = '2.6.1'
 
-androidApplication = "8.2.2"
-junitKtx = "1.1.5"
+paging = '3.2.1'
+
+androidApplication = '8.2.2'
+junitKtx = '1.1.5'
 
 [libraries]
 androidx-core-ktx = { group = 'androidx.core', name = 'core-ktx', version.ref = 'androidxCore' }
@@ -51,12 +54,17 @@ retrofit-serialization-json-converter = { group = 'com.jakewharton.retrofit', na
 
 okhttp-logging-interceptor = { group = 'com.squareup.okhttp3', name = 'logging-interceptor', version.ref = 'okhttp' }
 
+room-runtime = { group = 'androidx.room', name = 'room-runtime', version.ref = 'room' }
+room-compiler = { group = 'androidx.room', name = 'room-compiler', version.ref = 'room' }
+room-paging = { group = 'androidx.room', name = 'room-paging', version.ref = 'room' }
+
 paging-runtime = { group = 'androidx.paging', name = 'paging-runtime', version.ref = 'paging' }
 paging-compose = { group = 'androidx.paging', name = 'paging-compose', version.ref = 'paging' }
 
 androidx-compose-ui-tooling = { group = 'androidx.compose.ui', name = 'ui-tooling' }
 androidx-compose-ui-test-manifest = { group = 'androidx.compose.ui', name = 'ui-test-manifest' }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+
 
 [bundles]
 compose = [
@@ -67,6 +75,8 @@ compose = [
 ]
 paging = ['paging-compose', 'paging-runtime']
 retrofit = ['retrofit', 'retrofit-serialization-json-converter']
+room = ['room-runtime', 'room-paging']
+
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'androidApplication' }
