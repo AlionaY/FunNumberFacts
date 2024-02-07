@@ -1,12 +1,13 @@
 package com.example.funnumberfacts.network.numberservice
 
+import com.example.funnumberfacts.network.response.FactResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface NumberRetrofitService {
-    @GET("{number}")
-    fun getFact(@Path("number") number: Int): String
+    @GET("{number}?json")
+    fun getFact(@Path("number") number: Int): FactResponse
 
-    @GET("random/math")
-    fun getRandomFact(): String
+    @GET("random/math?json")
+    fun getRandomFact(): FactResponse
 }
