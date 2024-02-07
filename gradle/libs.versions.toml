@@ -15,6 +15,7 @@ androidxComposeFoundation = '1.6.0'
 
 kotlinxCoroutines = '1.7.3'
 kotlinxSerialization = '1.6.0'
+retrofitJsonSerializationConverter = '1.0.0'
 
 retrofit = '2.9.0'
 okhttp = '4.12.0'
@@ -48,7 +49,7 @@ hilt-compiler = { group = 'com.google.dagger', name = 'hilt-android-compiler', v
 
 retrofit = { group = 'com.squareup.retrofit2', name = 'retrofit', version.ref = 'retrofit' }
 retrofit-converter-gson = { group = 'com.squareup.retrofit2', name = 'converter-gson', version.ref = 'retrofit' }
-retrofit-converter-scalars = { group = 'com.squareup.retrofit2', name = 'converter-scalars', version.ref = 'retrofit' }
+retrofit-serialization-json-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofitJsonSerializationConverter" }
 
 okhttp-logging-interceptor = { group = 'com.squareup.okhttp3', name = 'logging-interceptor', version.ref = 'okhttp' }
 
@@ -67,7 +68,9 @@ compose = [
     'androidx-compose-foundation'
 ]
 paging = ['paging-compose', 'paging-runtime']
-retrofit = ['retrofit', 'retrofit-converter-gson', 'retrofit-converter-scalars']
+retrofit = [
+    'retrofit', 'retrofit-converter-gson', 'retrofit-serialization-json-converter'
+]
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'androidApplication' }

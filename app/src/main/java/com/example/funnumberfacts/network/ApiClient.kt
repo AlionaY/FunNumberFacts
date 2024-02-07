@@ -2,11 +2,14 @@ package com.example.funnumberfacts.network
 
 import com.example.funnumberfacts.data.ApiUrl
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIMEOUT = 50L
@@ -27,7 +30,17 @@ fun ApiClient(
     apiUrl: ApiUrl,
 ): Retrofit = Retrofit.Builder()
     .baseUrl(apiUrl.url)
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+    .addConverterFactory(getFactory())
     .client(okHttpClient)
     .build()
+
+private val json = Json {
+    isLenient = true
+    ignoreUnknownKeys = true
+    prettyPrint = true
+}
+
+fun getFactory(): Converter.Factory {
+    val media : MediaType = "application/json; charset=utf-8".toMediaType()
+    return json.asConverterFactory(media)
+}
