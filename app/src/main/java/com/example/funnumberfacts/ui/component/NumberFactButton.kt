@@ -22,7 +22,7 @@ fun NumberFactButton(
         onClick = onClick,
         modifier = modifier,
         shape = RoundedCornerShape(10),
-        contentPadding = PaddingValues(vertical = 18.dp, horizontal = 10.dp),
+        contentPadding = PaddingValues(vertical = 16.dp, horizontal = 10.dp),
         colors = colors
     ) {
         Text(

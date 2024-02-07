@@ -34,10 +34,7 @@ fun HomeScreen(
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             NumberTextField(
                 text = text,
                 onNumberEntered = viewModel::onNumberEntered,
@@ -47,11 +44,9 @@ fun HomeScreen(
 
             NumberFactButton(
                 onClick = viewModel::onGetNumberFactClick,
-                modifier = Modifier.padding(start = 10.dp),
+                modifier = Modifier.padding(start = 10.dp, top = 8.dp),
                 text = stringResource(id = R.string.get_fact)
             )
-
-
         }
 
         NumberFactButton(
