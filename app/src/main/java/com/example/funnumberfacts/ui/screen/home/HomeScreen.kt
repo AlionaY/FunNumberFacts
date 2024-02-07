@@ -28,36 +28,26 @@ fun HomeScreen(
     val viewState by viewModel.viewState.collectAsState()
     val (text, isValidInput) = viewState
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)
-    ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            NumberTextField(
-                text = text,
-                isValidInput = isValidInput,
-                onNumberEntered = viewModel::onNumberEntered,
-                onKeyboardAction = viewModel::onGetNumberFactClick,
-                modifier = Modifier.weight(1f),
-            )
-
-            NumberFactButton(
-                onClick = viewModel::onGetNumberFactClick,
-                modifier = Modifier.padding(start = 10.dp, top = 8.dp),
-                text = stringResource(id = R.string.get_fact)
-            )
+    HomeScreenContent(
+        text = text,
+        isValidInput = isValidInput,
+        onAction = { action ->
+            handleScreenAction(action, viewModel)
         }
+    )
+}
 
-        NumberFactButton(
-            onClick = viewModel::onGetRandomFactClick,
-            text = stringResource(id = R.string.get_fact_about_random_number),
-            modifier = Modifier
-                .padding(top = 15.dp)
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.onSecondaryContainer
-            )
-        )
+private fun handleScreenAction(
+    action: HomeScreenAction,
+    viewModel: HomeViewModel
+) {
+    when (action) {
+        is HomeScreenAction.OnNumberEntered -> viewModel.onNumberEntered(action.number)
+        HomeScreenAction.OnGetNumberFactClick -> viewModel.onGetNumberFactClick()
+        HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
+        HomeScreenAction.OnHistoryItemClick -> {
+//            todo: navigate to history screen
+        }
     }
 }
+

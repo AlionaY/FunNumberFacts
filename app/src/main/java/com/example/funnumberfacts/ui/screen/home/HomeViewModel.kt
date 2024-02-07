@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onGetRandomFactClick() {
+    fun onGetRandomNumberFactClick() {
         viewModelScope.launch {
             runCatching {
                 numberService.getRandomFact()

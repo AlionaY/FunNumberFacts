@@ -9,3 +9,10 @@ data class HomeViewState(
 //    todo: make list which contains history (db) + current request
     val fact: NumberFact? = null
 )
+
+sealed class HomeScreenAction {
+    class OnNumberEntered(val number: String): HomeScreenAction()
+    object OnGetNumberFactClick: HomeScreenAction()
+    object OnGetRandomNumberFactClick: HomeScreenAction()
+    object OnHistoryItemClick: HomeScreenAction()
+}
