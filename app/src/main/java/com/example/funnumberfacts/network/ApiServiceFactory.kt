@@ -12,5 +12,6 @@ interface ApiServiceFactory {
 class ApiServiceFactoryImpl(apiUrl: ApiUrl) : ApiServiceFactory {
 
     private val apiClient = ApiClient(apiUrl)
+    
     override fun numberService(): NumberService = NumberServiceImpl(apiClient.create())
 }
