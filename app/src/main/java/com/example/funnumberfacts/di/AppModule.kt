@@ -6,9 +6,9 @@ import com.example.funnumberfacts.data.ApiUrl
 import com.example.funnumberfacts.db.AppDatabase
 import com.example.funnumberfacts.db.NumberFactDao
 import com.example.funnumberfacts.db.createAppDatabase
-import com.example.funnumberfacts.network.ApiServiceFactory
-import com.example.funnumberfacts.network.ApiServiceFactoryImpl
-import com.example.funnumberfacts.network.numberservice.NumberService
+import com.example.funnumberfacts.network.service.ApiServiceFactory
+import com.example.funnumberfacts.network.service.ApiServiceFactoryImpl
+import com.example.funnumberfacts.network.service.NumberFactService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +30,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNumberService(factory: ApiServiceFactory): NumberService = factory.numberService()
+    fun provideNumberService(factory: ApiServiceFactory): NumberFactService = factory.numberService()
 
     @Singleton
     @Provides

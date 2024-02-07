@@ -1,14 +1,16 @@
-package com.example.funnumberfacts.network.numberservice
+package com.example.funnumberfacts.network.service
 
 import com.example.funnumberfacts.data.NumberFact
 import com.example.funnumberfacts.network.response.toNumberFact
 
-interface NumberService {
+interface NumberFactService {
     suspend fun getFactAboutNumber(number: Int): NumberFact
     suspend fun getRandomFact(): NumberFact
 }
 
-class NumberServiceImpl(private val service: NumberRetrofitService) : NumberService {
+class NumberFactServiceImpl(
+    private val service: NumberRetrofitService,
+) : NumberFactService {
     override suspend fun getFactAboutNumber(number: Int): NumberFact =
         service.getFactAboutNumber(number).toNumberFact()
 

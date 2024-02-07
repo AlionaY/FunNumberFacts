@@ -3,7 +3,7 @@ package com.example.funnumberfacts.ui.screen.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.funnumberfacts.network.numberservice.NumberService
+import com.example.funnumberfacts.network.service.NumberFactService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val numberService: NumberService
+    private val numberFactService: NumberFactService
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState())
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     private fun getFactAboutNumber(enteredNumber: Int) {
         viewModelScope.launch {
             runCatching {
-                numberService.getFactAboutNumber(enteredNumber)
+                numberFactService.getFactAboutNumber(enteredNumber)
             }.onSuccess { fact ->
                 _viewState.update { it.copy(fact = fact) }
                 Log.d("$$$", "fact $fact")
@@ -58,7 +58,7 @@ class HomeViewModel @Inject constructor(
     fun onGetRandomNumberFactClick() {
         viewModelScope.launch {
             runCatching {
-                numberService.getRandomFact()
+                numberFactService.getRandomFact()
             }.onSuccess { fact ->
                 _viewState.update { it.copy(fact = fact) }
                 Log.d("$$$", "fact $fact")

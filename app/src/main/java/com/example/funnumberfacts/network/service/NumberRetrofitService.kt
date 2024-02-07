@@ -1,4 +1,4 @@
-package com.example.funnumberfacts.network.numberservice
+package com.example.funnumberfacts.network.service
 
 import com.example.funnumberfacts.network.response.FactResponse
 import retrofit2.http.GET
