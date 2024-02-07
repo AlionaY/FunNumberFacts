@@ -10,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,9 +36,10 @@ fun HomeScreen(
         Row(modifier = Modifier.fillMaxWidth()) {
             NumberTextField(
                 text = text,
-                onNumberEntered = viewModel::onNumberEntered,
                 isValidInput = isValidInput,
-                modifier = Modifier.weight(1f)
+                onNumberEntered = viewModel::onNumberEntered,
+                onKeyboardAction = viewModel::onGetNumberFactClick,
+                modifier = Modifier.weight(1f),
             )
 
             NumberFactButton(
@@ -52,7 +52,9 @@ fun HomeScreen(
         NumberFactButton(
             onClick = viewModel::onGetRandomFactClick,
             text = stringResource(id = R.string.get_fact_about_random_number),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .padding(top = 15.dp)
+                .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.onSecondaryContainer
             )
