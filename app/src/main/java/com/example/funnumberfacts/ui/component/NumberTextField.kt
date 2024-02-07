@@ -23,17 +23,14 @@ import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 @Composable
 fun NumberTextField(
     text: String,
-    onNumberEntered: (String) -> Unit,
     isValidInput: Boolean,
+    onNumberEntered: (String) -> Unit,
+    onKeyboardAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         value = text,
-        onValueChange = {
-            if (it.contains(Regex("[%@*().-]")).not()) {
-                onNumberEntered(it)
-            }
-        },
+        onValueChange = { onNumberEntered(it) },
         modifier = modifier,
         label = {
             Text(
@@ -66,15 +63,7 @@ fun NumberTextField(
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         keyboardActions = KeyboardActions(
-            onDone = {
-//                    todo: make request
-            },
-            onNext = {
-//                    todo: make request
-            },
-            onSearch = {
-//                    todo: make request
-            }
+            onDone = { onKeyboardAction() }
         ),
         isError = isValidInput.not(),
         singleLine = true
@@ -89,7 +78,8 @@ private fun EmptyNumberTextFieldPreview() {
             NumberTextField(
                 text = "",
                 onNumberEntered = {},
-                isValidInput = true
+                isValidInput = true,
+                onKeyboardAction = {}
             )
         }
     }
@@ -103,7 +93,8 @@ private fun ValidNumberTextFieldPreview() {
             NumberTextField(
                 text = "111",
                 onNumberEntered = {},
-                isValidInput = true
+                isValidInput = true,
+                onKeyboardAction = {}
             )
         }
     }
@@ -117,7 +108,8 @@ private fun InvalidNumberTextFieldPreview() {
             NumberTextField(
                 text = "kldjhgfvld",
                 onNumberEntered = {},
-                isValidInput = false
+                isValidInput = false,
+                onKeyboardAction = {}
             )
         }
     }
