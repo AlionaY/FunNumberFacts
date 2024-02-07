@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.funnumberfacts.ui.screen.histoty.HistoryScreen
-import com.example.funnumberfacts.ui.screen.main.HomeScreen
+import com.example.funnumberfacts.ui.screen.home.HomeScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
