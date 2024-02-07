@@ -1,15 +1,18 @@
 package com.example.funnumberfacts.di
 
+import android.content.Context
 import com.example.funnumberfacts.BuildConfig
 import com.example.funnumberfacts.data.ApiUrl
+import com.example.funnumberfacts.db.AppDatabase
+import com.example.funnumberfacts.db.NumberFactDao
+import com.example.funnumberfacts.db.createAppDatabase
 import com.example.funnumberfacts.network.ApiServiceFactory
 import com.example.funnumberfacts.network.ApiServiceFactoryImpl
-import com.example.funnumberfacts.network.numberservice.NumberRetrofitService
 import com.example.funnumberfacts.network.numberservice.NumberService
-import com.example.funnumberfacts.network.numberservice.NumberServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -28,4 +31,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNumberService(factory: ApiServiceFactory): NumberService = factory.numberService()
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        createAppDatabase(context)
+
+    @Singleton
+    @Provides
+    fun provideNumberFactDao(appDatabase: AppDatabase): NumberFactDao = appDatabase.getNumberFactDao()
 }
