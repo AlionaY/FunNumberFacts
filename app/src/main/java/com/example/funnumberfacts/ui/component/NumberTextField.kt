@@ -1,5 +1,7 @@
 package com.example.funnumberfacts.ui.component
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -11,9 +13,12 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.funnumberfacts.R
+import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 
 @Composable
 fun NumberTextField(
@@ -75,3 +80,46 @@ fun NumberTextField(
         singleLine = true
     )
 }
+
+@Preview
+@Composable
+private fun EmptyNumberTextFieldPreview() {
+    FunNumberFactsTheme {
+        Box(modifier = Modifier.background(Color.LightGray)) {
+            NumberTextField(
+                text = "",
+                onNumberEntered = {},
+                isValidInput = true
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun ValidNumberTextFieldPreview() {
+    FunNumberFactsTheme {
+        Box(modifier = Modifier.background(Color.LightGray)) {
+            NumberTextField(
+                text = "111",
+                onNumberEntered = {},
+                isValidInput = true
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun InvalidNumberTextFieldPreview() {
+    FunNumberFactsTheme {
+        Box(modifier = Modifier.background(Color.LightGray)) {
+            NumberTextField(
+                text = "kldjhgfvld",
+                onNumberEntered = {},
+                isValidInput = false
+            )
+        }
+    }
+}
+
