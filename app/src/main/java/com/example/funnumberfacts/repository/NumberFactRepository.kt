@@ -12,7 +12,7 @@ interface NumberFactRepository {
     suspend fun clearHistory()
 }
 
-class NumberFactRepositoryImpl(val numberFactDao: NumberFactDao) : NumberFactRepository {
+class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : NumberFactRepository {
     override suspend fun getHistory(): List<NumberFact> =
         numberFactDao.getFactHistory().map { it.toNumberFact() }
 
