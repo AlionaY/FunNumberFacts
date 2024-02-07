@@ -1,10 +1,12 @@
 package com.example.funnumberfacts.network
 
 import com.example.funnumberfacts.data.ApiUrl
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIMEOUT = 50L
@@ -12,6 +14,8 @@ private const val TIMEOUT = 50L
 private val loggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
+
+private val gsonBuilder = GsonBuilder().setLenient().create()
 
 private val okHttpClient = OkHttpClient.Builder()
     .addInterceptor(loggingInterceptor)
@@ -23,6 +27,7 @@ fun ApiClient(
     apiUrl: ApiUrl,
 ): Retrofit = Retrofit.Builder()
     .baseUrl(apiUrl.url)
-    .addConverterFactory(GsonConverterFactory.create())
+    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
     .client(okHttpClient)
     .build()
