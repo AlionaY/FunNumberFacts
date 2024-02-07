@@ -27,6 +27,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNumberService(service: NumberRetrofitService): NumberService =
-        NumberServiceImpl(service)
+    fun provideNumberService(factory: ApiServiceFactory): NumberService = factory.numberService()
 }
