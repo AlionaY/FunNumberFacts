@@ -9,6 +9,8 @@ import com.example.funnumberfacts.db.createAppDatabase
 import com.example.funnumberfacts.network.service.ApiServiceFactory
 import com.example.funnumberfacts.network.service.ApiServiceFactoryImpl
 import com.example.funnumberfacts.network.service.NumberFactService
+import com.example.funnumberfacts.repository.NumberFactRepository
+import com.example.funnumberfacts.repository.NumberFactRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +32,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNumberService(factory: ApiServiceFactory): NumberFactService = factory.numberService()
+    fun provideNumberService(factory: ApiServiceFactory): NumberFactService =
+        factory.numberService()
 
     @Singleton
     @Provides
@@ -39,5 +42,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNumberFactDao(appDatabase: AppDatabase): NumberFactDao = appDatabase.getNumberFactDao()
+    fun provideNumberFactDao(appDatabase: AppDatabase): NumberFactDao =
+        appDatabase.getNumberFactDao()
+
+    @Singleton
+    @Provides
+    fun provideNumberFactRepository(dao: NumberFactDao): NumberFactRepository =
+        NumberFactRepositoryImpl(dao)
 }
