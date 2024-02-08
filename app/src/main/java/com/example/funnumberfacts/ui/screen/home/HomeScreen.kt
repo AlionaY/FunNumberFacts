@@ -6,6 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.funnumberfacts.ui.navigation.Routes
+import com.example.funnumberfacts.util.navigate
 
 @Composable
 fun HomeScreen(
@@ -24,12 +26,20 @@ fun HomeScreen(
         onAction = { action ->
             when (action) {
                 is HomeScreenAction.OnNumberEntered -> viewModel.onNumberEntered(action.number)
+                is HomeScreenAction.OnHistoryItemClick -> navigateToItemDetails(navController, action)
                 HomeScreenAction.OnGetNumberFactClick -> viewModel.onGetNumberFactClick()
                 HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
-                HomeScreenAction.OnHistoryItemClick -> {
-//                    todo: navigate to history screen
-                }
             }
         }
+    )
+}
+
+private fun navigateToItemDetails(
+    navController: NavController,
+    action: HomeScreenAction.OnHistoryItemClick
+) {
+    navController.navigate(
+        destination = Routes.FactDetailsScreen,
+        argument = action.itemId
     )
 }

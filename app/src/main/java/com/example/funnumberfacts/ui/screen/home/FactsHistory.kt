@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -28,9 +28,14 @@ import com.example.funnumberfacts.R
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.ScarpaFlow
+import com.example.funnumberfacts.util.orInvalidId
 
 @Composable
-fun FactsHistory(history: LazyPagingItems<FactItem>, modifier: Modifier = Modifier) {
+fun FactsHistory(
+    history: LazyPagingItems<FactItem>,
+    modifier: Modifier = Modifier,
+    onItemClick: (Int) -> Unit
+) {
     val shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
 
     LazyColumn(
@@ -58,8 +63,12 @@ fun FactsHistory(history: LazyPagingItems<FactItem>, modifier: Modifier = Modifi
                 color = ScarpaFlow
             )
         }
-        itemsIndexed(history.itemSnapshotList) { index, item ->
-            NumberFactItem(item = item, modifier = Modifier.fillMaxWidth())
+        items(history.itemSnapshotList) { item ->
+            NumberFactItem(
+                item = item,
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { onItemClick(item?.id.orInvalidId()) }
+            )
         }
     }
 }
@@ -69,7 +78,7 @@ fun FactsHistory(history: LazyPagingItems<FactItem>, modifier: Modifier = Modifi
 fun EmptyFactsHistoryPreview() {
     val history = emptyHistory.collectAsLazyPagingItems()
     FunNumberFactsTheme {
-        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray))
+        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray)) {}
     }
 }
 
@@ -78,7 +87,7 @@ fun EmptyFactsHistoryPreview() {
 fun SmallFactsHistoryPreview() {
     val history = smallHistory.collectAsLazyPagingItems()
     FunNumberFactsTheme {
-        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray))
+        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray)) {}
     }
 }
 
@@ -87,6 +96,6 @@ fun SmallFactsHistoryPreview() {
 fun BigFactsHistoryPreview() {
     val history = bigHistory.collectAsLazyPagingItems()
     FunNumberFactsTheme {
-        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray))
+        FactsHistory(history = history, modifier = Modifier.background(Color.LightGray)) {}
     }
 }
