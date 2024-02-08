@@ -92,7 +92,7 @@ private fun ScreenContent(
             fact = fact,
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(horizontal = 10.dp)
+                .padding(horizontal = 20.dp)
         )
     }
 }
