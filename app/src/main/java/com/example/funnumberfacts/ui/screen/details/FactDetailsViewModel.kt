@@ -41,7 +41,6 @@ class FactDetailsViewModel @Inject constructor(
                 _viewState.update { it.copy(fact = item, screenState = ScreenState.Idle) }
             }.onFailure {
                 _viewState.update { state -> state.copy(screenState = ScreenState.Error) }
-                Log.d("$$$", "erorr $it")
             }
         }
     }

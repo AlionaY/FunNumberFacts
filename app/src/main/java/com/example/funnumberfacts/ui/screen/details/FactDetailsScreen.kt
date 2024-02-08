@@ -32,6 +32,7 @@ import com.example.funnumberfacts.ui.theme.Melanzane
 import com.example.funnumberfacts.ui.theme.Orchid
 import com.example.funnumberfacts.ui.theme.WhiteLilac
 import com.example.funnumberfacts.ui.theme.WispPink
+import com.example.funnumberfacts.util.HandleProgressBar
 
 @Composable
 fun FactDetailsScreen(
@@ -41,6 +42,7 @@ fun FactDetailsScreen(
     val viewState by viewModel.viewState.collectAsState()
     val (screenState, fact) = viewState
 
+    HandleProgressBar(screenState = screenState)
     BackHandler {
         navController.popBackStack()
     }
