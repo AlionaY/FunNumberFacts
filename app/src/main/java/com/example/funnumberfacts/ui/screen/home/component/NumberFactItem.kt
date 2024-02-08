@@ -1,4 +1,4 @@
-package com.example.funnumberfacts.ui.screen.home
+package com.example.funnumberfacts.ui.screen.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

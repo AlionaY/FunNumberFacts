@@ -1,4 +1,4 @@
-package com.example.funnumberfacts.ui.screen.home
+package com.example.funnumberfacts.ui.screen.home.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,6 +25,9 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.funnumberfacts.R
 import com.example.funnumberfacts.db.FactItem
+import com.example.funnumberfacts.ui.screen.home.bigHistory
+import com.example.funnumberfacts.ui.screen.home.emptyHistory
+import com.example.funnumberfacts.ui.screen.home.smallHistory
 import com.example.funnumberfacts.ui.theme.Bouquet
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
