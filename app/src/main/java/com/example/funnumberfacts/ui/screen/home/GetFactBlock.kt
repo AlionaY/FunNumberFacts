@@ -1,5 +1,6 @@
 package com.example.funnumberfacts.ui.screen.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import com.example.funnumberfacts.R
 import com.example.funnumberfacts.ui.component.NumberFactButton
 import com.example.funnumberfacts.ui.component.NumberTextField
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
+import com.example.funnumberfacts.ui.theme.LightGray
 
 @Composable
 fun GetFactBlock(
@@ -61,7 +63,8 @@ private fun GetFactBlockPreview() {
         GetFactBlock(
             text = "lsgvbsvbd",
             isValidInput = true,
-            onAction = {}
+            onAction = {},
+            modifier = Modifier.background(LightGray)
         )
     }
 }

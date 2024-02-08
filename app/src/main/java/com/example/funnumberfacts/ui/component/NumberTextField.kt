@@ -73,7 +73,19 @@ fun NumberTextField(
             onDone = { onKeyboardAction() }
         ),
         isError = isValidInput.not(),
-        singleLine = true
+        singleLine = true,
+        colors = OutlinedTextFieldDefaults.colors(
+            unfocusedLabelColor = Thunder,
+            unfocusedLeadingIconColor = OldLavender,
+            unfocusedBorderColor = Thunder,
+            focusedLeadingIconColor = Thunder,
+            focusedTextColor = Thunder,
+            errorTextColor = Thunder,
+            unfocusedTextColor = Thunder,
+            errorTrailingIconColor = BurntSienna,
+            focusedTrailingIconColor = Thunder,
+            unfocusedTrailingIconColor = Thunder
+        )
     )
 }
 
