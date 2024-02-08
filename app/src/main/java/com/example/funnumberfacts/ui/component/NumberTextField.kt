@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.funnumberfacts.R
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
+import com.example.funnumberfacts.ui.theme.LightGray
 
 @Composable
 fun NumberTextField(
@@ -74,7 +75,7 @@ fun NumberTextField(
 @Composable
 private fun EmptyNumberTextFieldPreview() {
     FunNumberFactsTheme {
-        Box(modifier = Modifier.background(Color.LightGray)) {
+        Box(modifier = Modifier.background(LightGray)) {
             NumberTextField(
                 text = "",
                 onNumberEntered = {},
@@ -89,7 +90,7 @@ private fun EmptyNumberTextFieldPreview() {
 @Composable
 private fun ValidNumberTextFieldPreview() {
     FunNumberFactsTheme {
-        Box(modifier = Modifier.background(Color.LightGray)) {
+        Box(modifier = Modifier.background(LightGray)) {
             NumberTextField(
                 text = "111",
                 onNumberEntered = {},
@@ -104,7 +105,7 @@ private fun ValidNumberTextFieldPreview() {
 @Composable
 private fun InvalidNumberTextFieldPreview() {
     FunNumberFactsTheme {
-        Box(modifier = Modifier.background(Color.LightGray)) {
+        Box(modifier = Modifier.background(LightGray)) {
             NumberTextField(
                 text = "kldjhgfvld",
                 onNumberEntered = {},

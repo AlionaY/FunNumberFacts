@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
+import com.example.funnumberfacts.ui.theme.LightGray
+import com.example.funnumberfacts.ui.theme.Melanzane
+import com.example.funnumberfacts.ui.theme.OldLavender
 
 @Composable
 fun NumberFactItem(
@@ -35,19 +37,23 @@ fun NumberFactItem(
             fontSize = 25.sp,
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 6.dp)
+            modifier = Modifier.padding(horizontal = 6.dp),
+            color = Melanzane
         )
 
         Text(
             text = item?.text.orEmpty(),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = 10.dp)
+            modifier = Modifier.padding(start = 10.dp),
+            color = Melanzane
         )
     }
 
     Divider(
-        modifier = Modifier.fillMaxWidth(), color = Color.Gray, thickness = 1.dp
+        modifier = Modifier.fillMaxWidth(),
+        color = OldLavender,
+        thickness = 1.dp
     )
 }
 
@@ -58,7 +64,7 @@ private fun FactItemPreview() {
     FunNumberFactsTheme {
         NumberFactItem(
             item = item,
-            modifier = Modifier.background(Color.LightGray),
+            modifier = Modifier.background(LightGray),
             onClick = {})
     }
 }
