@@ -10,6 +10,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.funnumberfacts.ui.navigation.Routes
 import com.example.funnumberfacts.util.navigate
 
+//todo: loading circle
+
 @Composable
 fun HomeScreen(
     navController: NavController,

@@ -38,7 +38,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onGetNumberFactClick() {
-//        todo: make request, handle error, save to history
         val enteredNumber = _viewState.value.textInput.toIntOrNull()
         _viewState.update {
             it.copy(

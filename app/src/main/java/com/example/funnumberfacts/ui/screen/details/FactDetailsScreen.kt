@@ -39,7 +39,7 @@ fun FactDetailsScreen(
     viewModel: FactDetailsViewModel = hiltViewModel()
 ) {
     val viewState by viewModel.viewState.collectAsState()
-    val (fact) = viewState
+    val (screenState, fact) = viewState
 
     BackHandler {
         navController.popBackStack()
@@ -47,7 +47,7 @@ fun FactDetailsScreen(
 
     ScreenContent(
         fact = fact,
-        onBackClick = navController::popBackStack,
+        onBackClick = { navController.popBackStack() },
         modifier = Modifier
             .fillMaxSize()
             .background(brush = getScreenBrush())
