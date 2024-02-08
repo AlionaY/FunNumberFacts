@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">FunNumberFacts</string>
+
+    <string name="get_fact">Get a fact</string>
+    <string name="get_fact_about_random_number">Get a fact about a random number</string>
+    <string name="enter_number">Enter a number</string>
+    <string name="history">History</string>
+    <string name="fact_details">Fact Details</string>
+    <string name="clear_history">Clear history</string>
+    <string name="there_are_no_facts">There are no facts</string>
+    <string name="oops">Oops</string>
+    <string name="close">Close</string>
 </resources>

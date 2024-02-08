@@ -21,6 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "REST_URL", "\"http://numbersapi.com/\"")
     }
 
     buildTypes {
@@ -41,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
@@ -55,16 +58,20 @@ android {
 dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.bundles.paging)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.room)
 
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.lifecycle.ktx)
     implementation(libs.androidx.core.ktx)
 
     kapt(libs.hilt.compiler)
-
     implementation(libs.hilt.android)
-    implementation(libs.retrofit)
-    
+
+    implementation(libs.okhttp.logging.interceptor)
+
+    kapt(libs.room.compiler)
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
