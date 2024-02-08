@@ -35,14 +35,12 @@ class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : Numbe
 
     override fun addFactToHistory(item: NumberFact) {
         scope.launch {
-            runCatching {
-                numberFactDao.addToHistory(
-                    FactItem(
-                        number = item.number,
-                        text = item.fact
-                    )
+            numberFactDao.addToHistory(
+                FactItem(
+                    number = item.number,
+                    text = item.fact
                 )
-            }
+            )
         }
     }
 

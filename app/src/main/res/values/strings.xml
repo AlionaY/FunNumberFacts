@@ -8,4 +8,6 @@
     <string name="fact_details">Fact Details</string>
     <string name="clear_history">Clear history</string>
     <string name="there_are_no_facts">There are no facts</string>
+    <string name="oops">Oops</string>
+    <string name="close">Close</string>
 </resources>

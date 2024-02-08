@@ -67,7 +67,7 @@ class HomeViewModel @Inject constructor(
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
-                updateScreenState(ScreenState.Error)
+                updateScreenState(ScreenState.Error(error))
             }
         }
     }
@@ -84,7 +84,7 @@ class HomeViewModel @Inject constructor(
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
-                updateScreenState(ScreenState.Error)
+                updateScreenState(ScreenState.Error(error))
             }
         }
     }
@@ -99,5 +99,9 @@ class HomeViewModel @Inject constructor(
 
     fun clearHistory() {
         numberFactRepository.clearHistory()
+    }
+
+    fun onAcceptErrorDialog() {
+        _viewState.update { it.copy(screenState = ScreenState.Idle) }
     }
 }

@@ -8,10 +8,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.funnumberfacts.ui.navigation.Routes
+import com.example.funnumberfacts.util.HandleError
 import com.example.funnumberfacts.util.HandleProgressBar
 import com.example.funnumberfacts.util.navigate
-
-//todo: loading circle
 
 @Composable
 fun HomeScreen(
@@ -26,6 +25,9 @@ fun HomeScreen(
     val focusManager = LocalFocusManager.current
 
     HandleProgressBar(screenState = screenState)
+    HandleError(screenState = screenState) {
+        viewModel.onAcceptErrorDialog()
+    }
 
     HomeScreenContent(
         text = text,

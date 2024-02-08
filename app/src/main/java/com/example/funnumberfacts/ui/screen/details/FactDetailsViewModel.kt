@@ -1,10 +1,8 @@
 package com.example.funnumberfacts.ui.screen.details
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.funnumberfacts.data.NumberFact
 import com.example.funnumberfacts.data.ScreenState
 import com.example.funnumberfacts.repository.NumberFactRepository
 import com.example.funnumberfacts.ui.navigation.FACT_ID
@@ -40,8 +38,12 @@ class FactDetailsViewModel @Inject constructor(
             }.onSuccess { item ->
                 _viewState.update { it.copy(fact = item, screenState = ScreenState.Idle) }
             }.onFailure {
-                _viewState.update { state -> state.copy(screenState = ScreenState.Error) }
+                _viewState.update { state -> state.copy(screenState = ScreenState.Error(it)) }
             }
         }
+    }
+
+    fun onAcceptErrorDialog() {
+        _viewState.update { it.copy(screenState = ScreenState.Idle) }
     }
 }
