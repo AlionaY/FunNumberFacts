@@ -32,6 +32,8 @@ import com.example.funnumberfacts.ui.theme.Melanzane
 import com.example.funnumberfacts.ui.theme.Orchid
 import com.example.funnumberfacts.ui.theme.WhiteLilac
 import com.example.funnumberfacts.ui.theme.WispPink
+import com.example.funnumberfacts.util.HandleError
+import com.example.funnumberfacts.util.HandleProgressBar
 
 @Composable
 fun FactDetailsScreen(
@@ -39,15 +41,22 @@ fun FactDetailsScreen(
     viewModel: FactDetailsViewModel = hiltViewModel()
 ) {
     val viewState by viewModel.viewState.collectAsState()
-    val (fact) = viewState
+    val (screenState, fact) = viewState
 
+    HandleError(screenState = screenState) {
+        viewModel.onDismissRequest()
+    }
+    HandleProgressBar(
+        screenState = screenState,
+        onDismiss = { viewModel.onDismissRequest() }
+    )
     BackHandler {
         navController.popBackStack()
     }
 
     ScreenContent(
         fact = fact,
-        onBackClick = navController::popBackStack,
+        onBackClick = { navController.popBackStack() },
         modifier = Modifier
             .fillMaxSize()
             .background(brush = getScreenBrush())
@@ -81,7 +90,9 @@ private fun ScreenContent(
 
         FactDetails(
             fact = fact,
-            modifier = Modifier.Companion.align(Alignment.Center)
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 10.dp)
         )
     }
 }

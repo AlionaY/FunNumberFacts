@@ -1,10 +1,9 @@
 package com.example.funnumberfacts.ui.screen.details
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.funnumberfacts.data.NumberFact
+import com.example.funnumberfacts.data.ScreenState
 import com.example.funnumberfacts.repository.NumberFactRepository
 import com.example.funnumberfacts.ui.navigation.FACT_ID
 import com.example.funnumberfacts.util.orInvalidId
@@ -22,8 +21,8 @@ class FactDetailsViewModel @Inject constructor(
     private val factRepository: NumberFactRepository
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(ItemDetailsScreenState())
-    val viewState: StateFlow<ItemDetailsScreenState> = _viewState.asStateFlow()
+    private val _viewState = MutableStateFlow(FactDetailsScreenState())
+    val viewState: StateFlow<FactDetailsScreenState> = _viewState.asStateFlow()
 
     private val factId = savedStateHandle.get<Int>(FACT_ID).orInvalidId()
 
@@ -34,17 +33,17 @@ class FactDetailsViewModel @Inject constructor(
     private fun getItemDetails() {
         viewModelScope.launch {
             runCatching {
+                _viewState.update { it.copy(screenState = ScreenState.Loading) }
                 factRepository.getFactById(factId)
             }.onSuccess { item ->
-                _viewState.update { it.copy(fact = item) }
+                _viewState.update { it.copy(fact = item, screenState = ScreenState.Idle) }
             }.onFailure {
-                Log.d("$$$", "erorr $it")
+                _viewState.update { state -> state.copy(screenState = ScreenState.Error(it)) }
             }
         }
     }
+
+    fun onDismissRequest() {
+        _viewState.update { it.copy(screenState = ScreenState.Idle) }
+    }
 }
-
-data class ItemDetailsScreenState(
-    val fact: NumberFact? = null,
-
-    )

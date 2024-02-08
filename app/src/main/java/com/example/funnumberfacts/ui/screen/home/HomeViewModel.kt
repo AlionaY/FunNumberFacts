@@ -38,7 +38,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onGetNumberFactClick() {
-//        todo: make request, handle error, save to history
         val enteredNumber = _viewState.value.textInput.toIntOrNull()
         _viewState.update {
             it.copy(
@@ -68,7 +67,7 @@ class HomeViewModel @Inject constructor(
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
-                updateScreenState(ScreenState.Error)
+                updateScreenState(ScreenState.Error(error))
             }
         }
     }
@@ -85,7 +84,7 @@ class HomeViewModel @Inject constructor(
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
-                updateScreenState(ScreenState.Error)
+                updateScreenState(ScreenState.Error(error))
             }
         }
     }
@@ -96,5 +95,13 @@ class HomeViewModel @Inject constructor(
 
     private fun updateScreenState(state: ScreenState) {
         _viewState.update { it.copy(screenState = state) }
+    }
+
+    fun clearHistory() {
+        numberFactRepository.clearHistory()
+    }
+
+    fun onDismissRequest() {
+        _viewState.update { it.copy(screenState = ScreenState.Idle) }
     }
 }

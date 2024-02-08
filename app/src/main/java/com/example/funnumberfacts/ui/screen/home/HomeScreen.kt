@@ -8,6 +8,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.funnumberfacts.ui.navigation.Routes
+import com.example.funnumberfacts.util.HandleError
+import com.example.funnumberfacts.util.HandleProgressBar
 import com.example.funnumberfacts.util.navigate
 
 @Composable
@@ -18,9 +20,16 @@ fun HomeScreen(
 
     val history = viewModel.historyFlow.collectAsLazyPagingItems()
     val viewState by viewModel.viewState.collectAsState()
-    val (text, isValidInput) = viewState
+    val (text, isValidInput, screenState) = viewState
 
     val focusManager = LocalFocusManager.current
+
+    HandleProgressBar(screenState = screenState) {
+        viewModel.onDismissRequest()
+    }
+    HandleError(screenState = screenState) {
+        viewModel.onDismissRequest()
+    }
 
     HomeScreenContent(
         text = text,
@@ -36,6 +45,7 @@ fun HomeScreen(
                 }
                 HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
                 HomeScreenAction.OnClearNumberInputClick -> viewModel.onClearNumberInputClick()
+                HomeScreenAction.OnClearHistoryClick -> viewModel.clearHistory()
             }
         }
     )

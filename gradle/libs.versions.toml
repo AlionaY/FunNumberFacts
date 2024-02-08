@@ -7,7 +7,7 @@ androidxCore = '1.12.0'
 androidxCompose = '1.6.0'
 androidxComposeCompiler = '1.5.8'
 androidxLifecycle = '2.7.0'
-androidxMaterial = '1.1.2'
+androidxMaterial = '1.2.0-rc01'
 androidxNavigation = '2.7.6'
 androidxHiltNavigationCompose = '1.1.0'
 androidxComposeFoundation = '1.6.0'
@@ -36,7 +36,7 @@ androidx-activity-compose = { group = 'androidx.activity', name = 'activity-comp
 androidx-compose-ui-ui = { group = 'androidx.compose.ui', name = 'ui', version.ref = 'androidxCompose' }
 androidx-ui-graphics = { group = 'androidx.compose.ui', name = 'ui-graphics', version.ref = 'androidxCompose' }
 androidx-compose-ui-tooling-preview = { group = 'androidx.compose.ui', name = 'ui-tooling-preview', version.ref = 'androidxCompose' }
-androidx-compose-material3 = { group = 'androidx.compose.material3', name = 'material3', version.ref = 'androidxMaterial' }
+androidx-compose-material3 = { group = 'androidx.compose.material3', name = 'material3-android', version.ref = 'androidxMaterial' }
 androidx-compose-compiler = { group = 'androidx.compose.compiler', name = 'compiler', version.ref = 'androidxComposeCompiler' }
 androidx-compose-navigation = { group = 'androidx.navigation', name = 'navigation-compose', version.ref = 'androidxNavigation' }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }

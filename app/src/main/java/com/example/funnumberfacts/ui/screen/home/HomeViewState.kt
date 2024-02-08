@@ -6,9 +6,9 @@ import com.example.funnumberfacts.data.ScreenState
 data class HomeViewState(
     val textInput: String = "",
     val isValidInput: Boolean = true,
+    val screenState: ScreenState = ScreenState.Idle,
     val number: Int = 0,
     val history: MutableList<NumberFact> = mutableListOf(),
-    val screenState: ScreenState = ScreenState.Idle
 )
 
 sealed class HomeScreenAction {
@@ -17,4 +17,5 @@ sealed class HomeScreenAction {
     object OnGetNumberFactClick: HomeScreenAction()
     object OnGetRandomNumberFactClick: HomeScreenAction()
     object OnClearNumberInputClick: HomeScreenAction()
+    object OnClearHistoryClick: HomeScreenAction()
 }

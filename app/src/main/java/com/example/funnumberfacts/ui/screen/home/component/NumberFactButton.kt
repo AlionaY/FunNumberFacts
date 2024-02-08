@@ -1,4 +1,4 @@
-package com.example.funnumberfacts.ui.component
+package com.example.funnumberfacts.ui.screen.home.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape

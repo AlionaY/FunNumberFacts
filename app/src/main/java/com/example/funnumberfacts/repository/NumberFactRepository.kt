@@ -23,33 +23,24 @@ class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : Numbe
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private var fact: NumberFact? = null
-
     override fun getHistory(): PagingSource<Int, FactItem> =
         numberFactDao.getHistory()
 
-    override suspend fun getFactById(id: Int): NumberFact? {
+    override suspend fun getFactById(id: Int): NumberFact {
         val job = scope.async {
             numberFactDao.getFactById(id).toNumberFact()
         }
-        fact = job.await()
-        return fact
+        return job.await()
     }
 
     override fun addFactToHistory(item: NumberFact) {
         scope.launch {
-            runCatching {
-                numberFactDao.addToHistory(
-                    FactItem(
-                        number = item.number,
-                        text = item.fact
-                    )
+            numberFactDao.addToHistory(
+                FactItem(
+                    number = item.number,
+                    text = item.fact
                 )
-            }.onFailure {
-//                todo: handle error
-                Log.d("$$$", "error $it")
-            }
-//            todo: add item to paging list
+            )
         }
     }
 

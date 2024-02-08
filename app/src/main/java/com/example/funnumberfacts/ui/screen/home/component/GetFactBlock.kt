@@ -1,4 +1,4 @@
-package com.example.funnumberfacts.ui.screen.home
+package com.example.funnumberfacts.ui.screen.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.funnumberfacts.R
-import com.example.funnumberfacts.ui.component.NumberFactButton
-import com.example.funnumberfacts.ui.component.NumberTextField
+import com.example.funnumberfacts.ui.screen.home.HomeScreenAction
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
 
