@@ -43,7 +43,7 @@ class FactDetailsViewModel @Inject constructor(
         }
     }
 
-    fun onAcceptErrorDialog() {
+    fun onDismissRequest() {
         _viewState.update { it.copy(screenState = ScreenState.Idle) }
     }
 }

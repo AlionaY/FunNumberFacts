@@ -44,9 +44,12 @@ fun FactDetailsScreen(
     val (screenState, fact) = viewState
 
     HandleError(screenState = screenState) {
-        viewModel.onAcceptErrorDialog()
+        viewModel.onDismissRequest()
     }
-    HandleProgressBar(screenState = screenState)
+    HandleProgressBar(
+        screenState = screenState,
+        onDismiss = { viewModel.onDismissRequest() }
+    )
     BackHandler {
         navController.popBackStack()
     }

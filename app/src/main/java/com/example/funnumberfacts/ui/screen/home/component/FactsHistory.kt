@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -92,7 +94,7 @@ fun FactsHistory(
                     Text(
                         text = stringResource(id = R.string.history),
                         modifier = Modifier
-                            .padding(vertical = 10.dp)
+                            .padding(top = 20.dp, bottom = 10.dp)
                             .align(Alignment.Center),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.labelMedium,
@@ -130,6 +132,7 @@ fun FactsHistory(
                     )
                 }
             }
+            item { Spacer(modifier = Modifier.height(20.dp)) }
         }
     }
 }

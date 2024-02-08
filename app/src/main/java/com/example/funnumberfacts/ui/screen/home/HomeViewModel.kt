@@ -101,7 +101,7 @@ class HomeViewModel @Inject constructor(
         numberFactRepository.clearHistory()
     }
 
-    fun onAcceptErrorDialog() {
+    fun onDismissRequest() {
         _viewState.update { it.copy(screenState = ScreenState.Idle) }
     }
 }

@@ -24,9 +24,11 @@ fun HomeScreen(
 
     val focusManager = LocalFocusManager.current
 
-    HandleProgressBar(screenState = screenState)
+    HandleProgressBar(screenState = screenState) {
+        viewModel.onDismissRequest()
+    }
     HandleError(screenState = screenState) {
-        viewModel.onAcceptErrorDialog()
+        viewModel.onDismissRequest()
     }
 
     HomeScreenContent(

@@ -34,11 +34,13 @@ import androidx.compose.ui.window.DialogProperties
 import com.example.funnumberfacts.R
 import com.example.funnumberfacts.data.ScreenState
 import com.example.funnumberfacts.ui.theme.Melanzane
-import com.example.funnumberfacts.ui.theme.OldLavender
 import com.example.funnumberfacts.ui.theme.WhiteLilac
 
 @Composable
-fun HandleProgressBar(screenState: ScreenState) {
+fun HandleProgressBar(
+    screenState: ScreenState,
+    onDismiss: () -> Unit
+) {
     var showProgressBar by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = screenState) {
@@ -50,10 +52,12 @@ fun HandleProgressBar(screenState: ScreenState) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(44.dp),
-                color = OldLavender
-            )
+            Dialog(onDismissRequest = onDismiss) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(44.dp),
+                    color = WhiteLilac
+                )
+            }
         }
     }
 }
