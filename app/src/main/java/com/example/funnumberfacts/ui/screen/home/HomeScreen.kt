@@ -29,6 +29,7 @@ fun HomeScreen(
                 is HomeScreenAction.OnHistoryItemClick -> navigateToItemDetails(navController, action)
                 HomeScreenAction.OnGetNumberFactClick -> viewModel.onGetNumberFactClick()
                 HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
+                HomeScreenAction.OnClearNumberInputClick -> viewModel.onClearNumberInputClick()
             }
         }
     )

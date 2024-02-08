@@ -29,6 +29,7 @@ fun GetFactBlock(
                 text = text,
                 isValidInput = isValidInput,
                 onNumberEntered = { onAction(HomeScreenAction.OnNumberEntered(it)) },
+                onClearNumberInputClick = { onAction(HomeScreenAction.OnClearNumberInputClick) },
                 onKeyboardAction = { onAction(HomeScreenAction.OnGetNumberFactClick) },
                 modifier = Modifier.weight(1f),
             )

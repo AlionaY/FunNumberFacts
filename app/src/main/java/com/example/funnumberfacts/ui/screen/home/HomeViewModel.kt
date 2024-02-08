@@ -86,6 +86,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onClearNumberInputClick() {
+        _viewState.update { it.copy(textInput = "", isValidInput = true) }
+    }
+
     private fun updateScreenState(state: ScreenState) {
         _viewState.update { it.copy(screenState = state) }
     }
