@@ -36,6 +36,7 @@ fun HomeScreen(
                 }
                 HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
                 HomeScreenAction.OnClearNumberInputClick -> viewModel.onClearNumberInputClick()
+                HomeScreenAction.OnClearHistoryClick -> viewModel.clearHistory()
             }
         }
     )

@@ -50,7 +50,8 @@ fun HomeScreenContent(
 
         FactsHistory(history = history,
             modifier = Modifier.fillMaxWidth(),
-            onItemClick = { onAction(HomeScreenAction.OnHistoryItemClick(it)) }
+            onItemClick = { onAction(HomeScreenAction.OnHistoryItemClick(it)) },
+            onClearHistoryClick = { onAction(HomeScreenAction.OnClearHistoryClick) }
         )
     }
 }

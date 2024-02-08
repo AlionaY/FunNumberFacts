@@ -17,4 +17,5 @@ sealed class HomeScreenAction {
     object OnGetNumberFactClick: HomeScreenAction()
     object OnGetRandomNumberFactClick: HomeScreenAction()
     object OnClearNumberInputClick: HomeScreenAction()
+    object OnClearHistoryClick: HomeScreenAction()
 }

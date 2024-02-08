@@ -97,4 +97,8 @@ class HomeViewModel @Inject constructor(
     private fun updateScreenState(state: ScreenState) {
         _viewState.update { it.copy(screenState = state) }
     }
+
+    fun clearHistory() {
+        numberFactRepository.clearHistory()
+    }
 }
