@@ -1,6 +1,7 @@
 package com.example.funnumberfacts.repository
 
 import android.util.Log
+import androidx.paging.PagingSource
 import com.example.funnumberfacts.data.NumberFact
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.db.NumberFactDao
@@ -12,7 +13,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 interface NumberFactRepository {
-    suspend fun getHistory(): MutableList<NumberFact>
+    fun getHistory(): PagingSource<Int, FactItem>
     suspend fun getFactById(id: Int): NumberFact?
     fun addFactToHistory(item: NumberFact)
     fun clearHistory()
@@ -21,22 +22,16 @@ interface NumberFactRepository {
 class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : NumberFactRepository {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    private var history: MutableList<NumberFact> = mutableListOf()
+
     private var fact: NumberFact? = null
-    override suspend fun getHistory(): MutableList<NumberFact> {
-        val job = scope.async {
-            numberFactDao.getFactHistory()
-                .map { it.toNumberFact() }
-                .toMutableList()
-        }
-        history = job.await()
-        return history
-    }
+
+    override fun getHistory(): PagingSource<Int, FactItem> =
+        numberFactDao.getHistory()
 
     override suspend fun getFactById(id: Int): NumberFact? {
         val job = scope.async {
-                numberFactDao.getFactById(id).toNumberFact()
-            }
+            numberFactDao.getFactById(id).toNumberFact()
+        }
         fact = job.await()
         return fact
     }
@@ -54,7 +49,7 @@ class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : Numbe
 //                todo: handle error
                 Log.d("$$$", "error $it")
             }
-            history.add(item)
+//            todo: add item to paging list
         }
     }
 
