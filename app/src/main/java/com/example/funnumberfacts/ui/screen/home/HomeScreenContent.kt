@@ -39,41 +39,17 @@ fun HomeScreenContent(
             .fillMaxSize()
             .systemBarsPadding()
     ) {
-        Column(
+        GetFactBlock(
+            text = text,
+            isValidInput = isValidInput,
             modifier = Modifier.padding(
                 start = 10.dp,
                 end = 10.dp,
                 top = 10.dp,
                 bottom = 70.dp
-            )
-        ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                NumberTextField(
-                    text = text,
-                    isValidInput = isValidInput,
-                    onNumberEntered = { onAction(HomeScreenAction.OnNumberEntered(it)) },
-                    onKeyboardAction = { onAction(HomeScreenAction.OnGetNumberFactClick) },
-                    modifier = Modifier.weight(1f),
-                )
-
-                NumberFactButton(
-                    onClick = { onAction(HomeScreenAction.OnGetNumberFactClick) },
-                    modifier = Modifier.padding(start = 10.dp, top = 8.dp),
-                    text = stringResource(id = R.string.get_fact)
-                )
-            }
-
-            NumberFactButton(
-                onClick = { onAction(HomeScreenAction.OnGetRandomNumberFactClick) },
-                text = stringResource(id = R.string.get_fact_about_random_number),
-                modifier = Modifier
-                    .padding(top = 15.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.onSecondaryContainer
-                )
-            )
-        }
+            ),
+            onAction = onAction
+        )
 
         Spacer(modifier = Modifier.weight(1f))
 
