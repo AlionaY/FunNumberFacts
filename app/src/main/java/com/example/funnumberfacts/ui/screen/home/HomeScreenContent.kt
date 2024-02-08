@@ -70,7 +70,10 @@ fun HomeScreenContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        FactsHistory(history = history, modifier = Modifier.fillMaxWidth())
+        FactsHistory(history = history,
+            modifier = Modifier.fillMaxWidth(),
+            onItemClick = { onAction(HomeScreenAction.OnHistoryItemClick(it)) }
+        )
     }
 }
 

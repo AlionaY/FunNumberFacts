@@ -1,6 +1,7 @@
 package com.example.funnumberfacts.ui.screen.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,9 +21,13 @@ import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 
 @Composable
-fun NumberFactItem(item: FactItem?, modifier: Modifier = Modifier) {
+fun NumberFactItem(
+    item: FactItem?,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Row(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -51,6 +56,9 @@ fun NumberFactItem(item: FactItem?, modifier: Modifier = Modifier) {
 private fun FactItemPreview() {
     val item = FactItem(id = 0, number = 30, text = "ldkjhfvgn;slhvn;osdnv;gsold")
     FunNumberFactsTheme {
-        NumberFactItem(item = item, modifier = Modifier.background(Color.LightGray))
+        NumberFactItem(
+            item = item,
+            modifier = Modifier.background(Color.LightGray),
+            onClick = {})
     }
 }
