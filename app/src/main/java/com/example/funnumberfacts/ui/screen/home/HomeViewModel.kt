@@ -1,8 +1,11 @@
 package com.example.funnumberfacts.ui.screen.home
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.funnumberfacts.data.ScreenState
 import com.example.funnumberfacts.network.service.NumberFactService
 import com.example.funnumberfacts.repository.NumberFactRepository
@@ -22,10 +25,13 @@ class HomeViewModel @Inject constructor(
 
     private val _viewState = MutableStateFlow(HomeViewState())
     val viewState: StateFlow<HomeViewState> = _viewState.asStateFlow()
-
-    init {
-        getHistory()
-    }
+    val historyFlow = Pager(
+        config = PagingConfig(
+            pageSize = 10,
+            prefetchDistance = 10,
+        ),
+        pagingSourceFactory = { numberFactRepository.getHistory() }
+    ).flow.cachedIn(viewModelScope)
 
     fun onNumberEntered(text: String) {
         _viewState.update { it.copy(textInput = text) }
@@ -75,25 +81,6 @@ class HomeViewModel @Inject constructor(
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
-                updateScreenState(ScreenState.Error)
-            }
-        }
-    }
-
-    private fun getHistory() {
-//        todo: cache data in splash screen
-        viewModelScope.launch {
-            runCatching {
-                updateScreenState(ScreenState.Loading)
-                numberFactRepository.getHistory()
-            }.onSuccess { history ->
-                _viewState.update {
-                    it.copy(
-                        screenState = ScreenState.Idle,
-                        history = history.toMutableList()
-                    )
-                }
-            }.onFailure {
                 updateScreenState(ScreenState.Error)
             }
         }

@@ -4,4 +4,5 @@
     <string name="get_fact">Get a fact</string>
     <string name="get_fact_about_random_number">Get a fact about a random number</string>
     <string name="enter_number">Enter a number</string>
+    <string name="history">History</string>
 </resources>
