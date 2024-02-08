@@ -7,4 +7,5 @@
     <string name="history">History</string>
     <string name="fact_details">Fact Details</string>
     <string name="clear_history">Clear history</string>
+    <string name="there_are_no_facts">There are no facts</string>
 </resources>

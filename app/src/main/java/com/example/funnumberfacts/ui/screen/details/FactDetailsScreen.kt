@@ -81,7 +81,9 @@ private fun ScreenContent(
 
         FactDetails(
             fact = fact,
-            modifier = Modifier.Companion.align(Alignment.Center)
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 10.dp)
         )
     }
 }

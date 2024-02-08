@@ -9,7 +9,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -43,6 +45,7 @@ import com.example.funnumberfacts.ui.screen.home.smallHistory
 import com.example.funnumberfacts.ui.theme.Bouquet
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
+import com.example.funnumberfacts.ui.theme.OldLavender
 import com.example.funnumberfacts.ui.theme.Thunder
 import com.example.funnumberfacts.util.orInvalidId
 
@@ -110,14 +113,40 @@ fun FactsHistory(
                     }
                 }
             }
-            items(history.itemSnapshotList) { item ->
-                NumberFactItem(
-                    item = item,
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { onItemClick(item?.id.orInvalidId()) }
-                )
+            if (history.itemSnapshotList.isNotEmpty()) {
+                items(history.itemSnapshotList) { item ->
+                    NumberFactItem(
+                        item = item,
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = { onItemClick(item?.id.orInvalidId()) }
+                    )
+                }
+            } else {
+                item {
+                    NoHistory(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(vertical = 20.dp)
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun NoHistory(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = stringResource(id = R.string.there_are_no_facts),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp),
+            color = OldLavender,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
 
