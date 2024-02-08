@@ -60,7 +60,11 @@ class HomeViewModel @Inject constructor(
             }.onSuccess { fact ->
                 _viewState.update {
                     it.history.add(fact)
-                    it.copy(screenState = ScreenState.Idle)
+                    it.copy(
+                        screenState = ScreenState.Idle,
+                        textInput = "",
+                        isValidInput = true
+                    )
                 }
                 numberFactRepository.addFactToHistory(fact)
             }.onFailure { error ->
@@ -84,6 +88,10 @@ class HomeViewModel @Inject constructor(
                 updateScreenState(ScreenState.Error)
             }
         }
+    }
+
+    fun onClearNumberInputClick() {
+        _viewState.update { it.copy(textInput = "", isValidInput = true) }
     }
 
     private fun updateScreenState(state: ScreenState) {

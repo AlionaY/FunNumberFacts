@@ -3,6 +3,7 @@ package com.example.funnumberfacts.ui.screen.home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -19,6 +20,8 @@ fun HomeScreen(
     val viewState by viewModel.viewState.collectAsState()
     val (text, isValidInput) = viewState
 
+    val focusManager = LocalFocusManager.current
+
     HomeScreenContent(
         text = text,
         isValidInput = isValidInput,
@@ -27,8 +30,12 @@ fun HomeScreen(
             when (action) {
                 is HomeScreenAction.OnNumberEntered -> viewModel.onNumberEntered(action.number)
                 is HomeScreenAction.OnHistoryItemClick -> navigateToItemDetails(navController, action)
-                HomeScreenAction.OnGetNumberFactClick -> viewModel.onGetNumberFactClick()
+                HomeScreenAction.OnGetNumberFactClick -> {
+                    viewModel.onGetNumberFactClick()
+                    focusManager.clearFocus()
+                }
                 HomeScreenAction.OnGetRandomNumberFactClick -> viewModel.onGetRandomNumberFactClick()
+                HomeScreenAction.OnClearNumberInputClick -> viewModel.onClearNumberInputClick()
             }
         }
     )

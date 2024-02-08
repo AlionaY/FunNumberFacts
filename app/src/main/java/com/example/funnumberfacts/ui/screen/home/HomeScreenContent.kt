@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +23,7 @@ import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.component.NumberFactButton
 import com.example.funnumberfacts.ui.component.NumberTextField
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
+import com.example.funnumberfacts.ui.theme.LightGray
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -35,38 +35,21 @@ fun HomeScreenContent(
     onAction: (HomeScreenAction) -> Unit
 ) {
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .systemBarsPadding()
     ) {
-        Spacer(modifier = Modifier.height(50.dp))
-
-        Column(modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 50.dp)) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                NumberTextField(
-                    text = text,
-                    isValidInput = isValidInput,
-                    onNumberEntered = { onAction(HomeScreenAction.OnNumberEntered(it)) },
-                    onKeyboardAction = { onAction(HomeScreenAction.OnGetNumberFactClick) },
-                    modifier = Modifier.weight(1f),
-                )
-
-                NumberFactButton(
-                    onClick = { onAction(HomeScreenAction.OnGetNumberFactClick) },
-                    modifier = Modifier.padding(start = 10.dp, top = 8.dp),
-                    text = stringResource(id = R.string.get_fact)
-                )
-            }
-
-            NumberFactButton(
-                onClick = { onAction(HomeScreenAction.OnGetRandomNumberFactClick) },
-                text = stringResource(id = R.string.get_fact_about_random_number),
-                modifier = Modifier
-                    .padding(top = 15.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.onSecondaryContainer
-                )
-            )
-        }
+        GetFactBlock(
+            text = text,
+            isValidInput = isValidInput,
+            modifier = Modifier.padding(
+                start = 10.dp,
+                end = 10.dp,
+                top = 10.dp,
+                bottom = 70.dp
+            ),
+            onAction = onAction
+        )
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -84,7 +67,7 @@ private fun HomeEmptyInputScreenContentPreview() {
     val history = emptyHistory.collectAsLazyPagingItems()
 
     FunNumberFactsTheme {
-        HomeScreenContent(modifier = Modifier.background(Color.LightGray),
+        HomeScreenContent(modifier = Modifier.background(LightGray),
             text = "",
             isValidInput = true,
             history = history,
@@ -98,7 +81,7 @@ private fun HomeInvalidInputScreenContentPreview() {
     val history = smallHistory.collectAsLazyPagingItems()
 
     FunNumberFactsTheme {
-        HomeScreenContent(modifier = Modifier.background(Color.LightGray),
+        HomeScreenContent(modifier = Modifier.background(LightGray),
             text = "slkjd",
             isValidInput = false,
             history = history,
@@ -112,7 +95,7 @@ private fun HomeValidInputScreenContentPreview() {
     val history = bigHistory.collectAsLazyPagingItems()
 
     FunNumberFactsTheme {
-        HomeScreenContent(modifier = Modifier.background(Color.LightGray),
+        HomeScreenContent(modifier = Modifier.background(LightGray),
             text = "111",
             isValidInput = true,
             history = history,
