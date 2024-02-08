@@ -40,7 +40,7 @@ fun HomeScreenContent(
             modifier = Modifier.padding(
                 start = 10.dp,
                 end = 10.dp,
-                top = 10.dp,
+                top = 40.dp,
                 bottom = 70.dp
             ),
             onAction = onAction
