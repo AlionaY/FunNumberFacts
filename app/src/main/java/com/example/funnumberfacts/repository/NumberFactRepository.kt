@@ -1,52 +1,55 @@
 package com.example.funnumberfacts.repository
 
-import android.util.Log
 import androidx.paging.PagingSource
 import com.example.funnumberfacts.data.NumberFact
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.db.NumberFactDao
 import com.example.funnumberfacts.db.toNumberFact
-import kotlinx.coroutines.CoroutineScope
+import com.example.funnumberfacts.network.service.NumberFactService
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 interface NumberFactRepository {
-    fun getHistory(): PagingSource<Int, FactItem>
+    suspend fun getHistory(): List<FactItem>
     suspend fun getFactById(id: Int): NumberFact?
-    fun addFactToHistory(item: NumberFact)
-    fun clearHistory()
+    suspend fun clearHistory()
+    suspend fun getFactAboutNumber(number: Int)
+    suspend fun getRandomFact()
 }
 
-class NumberFactRepositoryImpl(private val numberFactDao: NumberFactDao) : NumberFactRepository {
+class NumberFactRepositoryImpl(
+    private val numberFactDao: NumberFactDao,
+    private val service: NumberFactService
+) : NumberFactRepository {
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-
-    override fun getHistory(): PagingSource<Int, FactItem> =
+    override suspend fun getHistory(): List<FactItem> =
         numberFactDao.getHistory()
 
-    override suspend fun getFactById(id: Int): NumberFact {
-        val job = scope.async {
-            numberFactDao.getFactById(id).toNumberFact()
-        }
-        return job.await()
-    }
+    override suspend fun getFactById(id: Int): NumberFact =
+        numberFactDao.getFactById(id).toNumberFact()
 
-    override fun addFactToHistory(item: NumberFact) {
-        scope.launch {
-            numberFactDao.addToHistory(
-                FactItem(
-                    number = item.number,
-                    text = item.fact
-                )
+    private suspend fun addFactToHistory(item: NumberFact) {
+        numberFactDao.addToHistory(
+            FactItem(
+                number = item.number,
+                text = item.fact
             )
+        )
+    }
+
+    override suspend fun clearHistory() = numberFactDao.clearHistory()
+
+    override suspend fun getFactAboutNumber(number: Int) {
+        withContext(Dispatchers.IO) {
+            val fact = service.getFactAboutNumber(number)
+            addFactToHistory(fact)
         }
     }
 
-    override fun clearHistory() {
-        scope.launch {
-            numberFactDao.clearHistory()
+    override suspend fun getRandomFact() {
+        withContext(Dispatchers.IO) {
+            val fact = service.getRandomFact()
+            addFactToHistory(fact)
         }
     }
 }

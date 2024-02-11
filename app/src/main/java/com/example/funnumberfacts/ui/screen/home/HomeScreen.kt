@@ -1,6 +1,7 @@
 package com.example.funnumberfacts.ui.screen.home
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalFocusManager
@@ -18,9 +19,9 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val history = viewModel.historyFlow.collectAsLazyPagingItems()
     val viewState by viewModel.viewState.collectAsState()
-    val (text, isValidInput, screenState) = viewState
+    val (factsHistory, text, isValidInput, screenState, needToRefreshData) = viewState
+    val history = factsHistory.collectAsLazyPagingItems()
 
     val focusManager = LocalFocusManager.current
 
@@ -29,6 +30,13 @@ fun HomeScreen(
     }
     HandleError(screenState = screenState) {
         viewModel.onDismissRequest()
+    }
+
+    LaunchedEffect(key1 = needToRefreshData) {
+        if (needToRefreshData) {
+            history.refresh()
+            viewModel.invalidate()
+        }
     }
 
     HomeScreenContent(
