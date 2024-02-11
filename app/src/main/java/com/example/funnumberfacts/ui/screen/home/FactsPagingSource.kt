@@ -5,8 +5,11 @@ import androidx.paging.PagingState
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.repository.NumberFactRepository
 
+private const val LIMIT = 10
+
 class FactsPagingSource(
-    private val repository: NumberFactRepository
+    private val repository: NumberFactRepository,
+    private val defaultLimit: Int = LIMIT,
 ) : PagingSource<Int, FactItem>() {
     override fun getRefreshKey(state: PagingState<Int, FactItem>): Int? {
         val anchorPosition = state.anchorPosition ?: 0
@@ -15,11 +18,19 @@ class FactsPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FactItem> {
-        val nextPage = params.key ?: 1
+        val currentOffset = params.key ?: 0
+        val data = repository.getHistory(defaultLimit, currentOffset)
+
+        val nextKey = when {
+            data.isEmpty() -> null
+            data.size < defaultLimit -> null
+            else -> currentOffset.plus(data.size)
+        }
+
         val result = try {
             LoadResult.Page(
-                data = repository.getHistory(),
-                nextKey = nextPage.plus(1),
+                data = data,
+                nextKey = nextKey,
                 prevKey = null
             )
         } catch (e: Exception) {

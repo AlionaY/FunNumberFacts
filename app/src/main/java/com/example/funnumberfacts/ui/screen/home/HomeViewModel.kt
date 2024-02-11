@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val PAGE_SIZE = 3
+private const val PAGE_SIZE = 15
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -24,8 +24,8 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val historyFlow = Pager(
-        config = PagingConfig(pageSize = PAGE_SIZE, initialLoadSize = 1),
-        pagingSourceFactory = { FactsPagingSource(numberFactRepository) }
+        config = PagingConfig(pageSize = PAGE_SIZE),
+        pagingSourceFactory = { FactsPagingSource(numberFactRepository, PAGE_SIZE) }
     ).flow.cachedIn(viewModelScope)
 
     private val _viewState = MutableStateFlow(HomeViewState(historyFlow))
