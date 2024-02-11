@@ -59,7 +59,7 @@ fun NumberTextField(
             )
         },
         trailingIcon = {
-            if (text.isNotEmpty() || isValidInput.not()) {
+            if (text.isNotEmpty() && isValidInput.not()) {
                 IconButton(onClick = { onClearNumberInputClick() }) {
                     Icon(
                         imageVector = Icons.Filled.Clear,
