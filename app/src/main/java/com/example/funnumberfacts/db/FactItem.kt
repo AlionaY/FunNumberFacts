@@ -12,7 +12,7 @@ data class FactItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo(name = "number")
-    val number: Int,
+    val number: Int?,
     @ColumnInfo(name = "text")
     val text: String
 )
