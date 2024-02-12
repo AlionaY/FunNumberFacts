@@ -11,6 +11,7 @@ androidxMaterial = '1.2.0-rc01'
 androidxNavigation = '2.7.6'
 androidxHiltNavigationCompose = '1.1.0'
 androidxComposeFoundation = '1.6.0'
+androidxCoreSplashscreen = '1.0.1'
 
 kotlinxCoroutines = '1.7.3'
 kotlinxSerialization = '1.6.0'
@@ -41,6 +42,7 @@ androidx-compose-compiler = { group = 'androidx.compose.compiler', name = 'compi
 androidx-compose-navigation = { group = 'androidx.navigation', name = 'navigation-compose', version.ref = 'androidxNavigation' }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "androidxComposeFoundation" }
+androidx-core-splashscreen = { group = 'androidx.core', name = 'core-splashscreen', version.ref = 'androidxCoreSplashscreen' }
 
 kotlinx-coroutines-core = { group = 'org.jetbrains.kotlinx', name = 'kotlinx-coroutines-android', version.ref = 'kotlinxCoroutines' }
 kotlinx-coroutines-android = { group = 'org.jetbrains.kotlinx', name = 'kotlinx-coroutines-android', version.ref = 'kotlinxCoroutines' }

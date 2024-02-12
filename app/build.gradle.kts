@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.lifecycle.ktx)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
 
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.android)

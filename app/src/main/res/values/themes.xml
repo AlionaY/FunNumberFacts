@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.FunNumberFacts" parent="android:Theme.Material.Light.NoActionBar">
+
+    <style name="Theme.SplashScreen.NumberFunFacts" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_search</item>
+        <item name="windowSplashScreenBackground">@color/white_lilac</item>
+        <item name="postSplashScreenTheme">@style/Theme.FunNumberFacts</item>
+    </style>
+
+    <style name="Theme.FunNumberFacts" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@color/transparent</item>
     </style>
 </resources>
