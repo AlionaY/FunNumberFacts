@@ -11,6 +11,7 @@ import com.example.funnumberfacts.network.service.ApiServiceFactoryImpl
 import com.example.funnumberfacts.network.service.NumberFactService
 import com.example.funnumberfacts.repository.NumberFactRepository
 import com.example.funnumberfacts.repository.NumberFactRepositoryImpl
+import com.example.funnumberfacts.ui.screen.home.FactsPagingSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +48,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNumberFactRepository(dao: NumberFactDao): NumberFactRepository =
-        NumberFactRepositoryImpl(dao)
+    fun provideNumberFactRepository(
+        dao: NumberFactDao,
+        service: NumberFactService
+    ): NumberFactRepository =
+        NumberFactRepositoryImpl(dao, service)
+
+    @Singleton
+    @Provides
+    fun provideFactsPagingSource(repo: NumberFactRepository) = FactsPagingSource(repo)
 }
