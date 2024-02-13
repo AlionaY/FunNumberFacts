@@ -19,11 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.funnumberfacts.R
-import com.example.funnumberfacts.ui.theme.BurntSienna
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
-import com.example.funnumberfacts.ui.theme.OldLavender
-import com.example.funnumberfacts.ui.theme.Thunder
 
 @Composable
 fun NumberTextField(
@@ -75,16 +72,16 @@ fun NumberTextField(
         isError = isValidInput.not(),
         singleLine = true,
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedLabelColor = Thunder,
-            unfocusedLeadingIconColor = OldLavender,
-            unfocusedBorderColor = Thunder,
-            focusedLeadingIconColor = Thunder,
-            focusedTextColor = Thunder,
-            errorTextColor = Thunder,
-            unfocusedTextColor = Thunder,
-            errorTrailingIconColor = BurntSienna,
-            focusedTrailingIconColor = Thunder,
-            unfocusedTrailingIconColor = Thunder
+            unfocusedLabelColor = MaterialTheme.colorScheme.outline,
+            unfocusedLeadingIconColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            focusedLeadingIconColor = MaterialTheme.colorScheme.outline,
+            focusedTextColor = MaterialTheme.colorScheme.outline,
+            errorTextColor = MaterialTheme.colorScheme.outline,
+            unfocusedTextColor = MaterialTheme.colorScheme.outline,
+            errorTrailingIconColor = MaterialTheme.colorScheme.error,
+            focusedTrailingIconColor = MaterialTheme.colorScheme.outline,
+            unfocusedTrailingIconColor = MaterialTheme.colorScheme.outline
         )
     )
 }
