@@ -55,7 +55,7 @@ fun HandleProgressBar(
             Dialog(onDismissRequest = onDismiss) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(44.dp),
-                    color = WhiteLilac
+                    color = MaterialTheme.colorScheme.background
                 )
             }
         }
@@ -85,7 +85,7 @@ fun HandleError(
             ) {
                 Column(
                     modifier = Modifier
-                        .background(WhiteLilac, shape)
+                        .background(MaterialTheme.colorScheme.background, shape)
                         .padding(horizontal = 20.dp)
                         .fillMaxWidth()
                         .wrapContentHeight(),
@@ -97,7 +97,7 @@ fun HandleError(
                         modifier = Modifier.padding(top = 24.dp),
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 30.sp,
-                        color = Melanzane,
+                        color = MaterialTheme.colorScheme.tertiary,
                         textAlign = TextAlign.Center,
                         fontWeight = FontWeight.Bold
                     )
@@ -105,7 +105,7 @@ fun HandleError(
                         text = exception.message.orEmpty(),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 16.sp,
-                        color = Melanzane,
+                        color = MaterialTheme.colorScheme.tertiary,
                         textAlign = TextAlign.Center
                     )
                     Button(
