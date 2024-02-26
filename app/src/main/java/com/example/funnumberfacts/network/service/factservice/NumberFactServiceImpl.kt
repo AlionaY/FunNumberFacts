@@ -1,12 +1,8 @@
-package com.example.funnumberfacts.network.service
+package com.example.funnumberfacts.network.service.factservice
 
 import com.example.funnumberfacts.data.NumberFact
 import com.example.funnumberfacts.network.response.toNumberFact
-
-interface NumberFactService {
-    suspend fun getFactAboutNumber(number: Int): NumberFact
-    suspend fun getRandomFact(): NumberFact
-}
+import com.example.funnumberfacts.network.service.NumberRetrofitService
 
 class NumberFactServiceImpl(
     private val service: NumberRetrofitService,
