@@ -1,6 +1,5 @@
 package com.example.funnumberfacts.ui.screen.home
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.funnumberfacts.db.FactItem
@@ -27,10 +26,6 @@ class FactsPagingSource(
             data.size < defaultLimit -> null
             else -> currentOffset.plus(data.size)
         }
-        Log.d(
-            "$$$",
-            "offset $currentOffset, params key ${params.key}, next key $nextKey, data size ${data.size}"
-        )
 
         val result = try {
             LoadResult.Page(
