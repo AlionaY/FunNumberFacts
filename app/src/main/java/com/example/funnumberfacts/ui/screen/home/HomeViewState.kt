@@ -12,12 +12,3 @@ data class HomeViewState(
     val screenState: ScreenState = ScreenState.Idle,
     val needToRefreshData: Boolean = false,
 )
-
-sealed class HomeScreenAction {
-    class OnNumberEntered(val number: String): HomeScreenAction()
-    class OnHistoryItemClick(val itemId: Int): HomeScreenAction()
-    object OnGetNumberFactClick: HomeScreenAction()
-    object OnGetRandomNumberFactClick: HomeScreenAction()
-    object OnClearNumberInputClick: HomeScreenAction()
-    object OnClearHistoryClick: HomeScreenAction()
-}

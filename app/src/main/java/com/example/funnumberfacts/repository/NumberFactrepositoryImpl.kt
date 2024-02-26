@@ -16,8 +16,8 @@ class NumberFactRepositoryImpl @Inject constructor(
     private val service: NumberFactService
 ) : NumberFactRepository {
 
-    override suspend fun getHistory(limit: Int, offset: Int): List<FactItem> =
-        numberFactDao.getHistory(limit, offset)
+    override suspend fun getHistory(): List<FactItem> =
+        numberFactDao.getHistory()
 
     override suspend fun getFactById(id: Int): NumberFact =
         numberFactDao.getFactById(id).toNumberFact()
