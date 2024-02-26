@@ -10,7 +10,7 @@ data class FactResponse(
     @SerialName("text")
     val fact: String,
     @SerialName("number")
-    val number: Int,
+    val number: Long,
     @SerialName("found")
     val found: Boolean,
     @SerialName("type")
