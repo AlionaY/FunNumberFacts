@@ -7,7 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.funnumberfacts.data.ScreenState
-import com.example.funnumberfacts.network.service.NumberFactService
 import com.example.funnumberfacts.repository.NumberFactRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,21 +16,20 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 15
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val numberFactService: NumberFactService,
     private val numberFactRepository: NumberFactRepository
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(HomeViewState())
-    val viewState: StateFlow<HomeViewState> = _viewState.asStateFlow()
-    val historyFlow = Pager(
-        config = PagingConfig(
-            pageSize = 10,
-            prefetchDistance = 10,
-        ),
-        pagingSourceFactory = { numberFactRepository.getHistory() }
+    private val historyFlow = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE),
+        pagingSourceFactory = { FactsPagingSource(numberFactRepository, PAGE_SIZE) }
     ).flow.cachedIn(viewModelScope)
+
+    private val _viewState = MutableStateFlow(HomeViewState(historyFlow))
+    val viewState: StateFlow<HomeViewState> = _viewState.asStateFlow()
 
     fun onNumberEntered(text: String) {
         _viewState.update { it.copy(textInput = text) }
@@ -40,10 +38,7 @@ class HomeViewModel @Inject constructor(
     fun onGetNumberFactClick() {
         val enteredNumber = _viewState.value.textInput.toIntOrNull()
         _viewState.update {
-            it.copy(
-                number = enteredNumber ?: 0,
-                isValidInput = enteredNumber != null
-            )
+            it.copy(isValidInput = enteredNumber != null)
         }
 
         if (enteredNumber != null) {
@@ -55,20 +50,23 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 updateScreenState(ScreenState.Loading)
-                numberFactService.getFactAboutNumber(enteredNumber)
-            }.onSuccess { fact ->
-                _viewState.update {
-                    it.history.add(fact)
-                    it.copy(
-                        screenState = ScreenState.Idle,
-                        textInput = "",
-                        isValidInput = true
-                    )
-                }
-                numberFactRepository.addFactToHistory(fact)
+                numberFactRepository.getFactAboutNumber(enteredNumber)
+            }.onSuccess {
+                onSuccessRequest()
             }.onFailure { error ->
                 updateScreenState(ScreenState.Error(error))
             }
+        }
+    }
+
+    private fun onSuccessRequest() {
+        _viewState.update {
+            it.copy(
+                screenState = ScreenState.Idle,
+                textInput = "",
+                isValidInput = true,
+                needToRefreshData = true
+            )
         }
     }
 
@@ -76,13 +74,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 updateScreenState(ScreenState.Loading)
-                numberFactService.getRandomFact()
-            }.onSuccess { fact ->
-                _viewState.update {
-                    it.history.add(fact)
-                    it.copy(screenState = ScreenState.Idle)
-                }
-                numberFactRepository.addFactToHistory(fact)
+                numberFactRepository.getRandomFact()
+            }.onSuccess {
+                onSuccessRequest()
             }.onFailure { error ->
                 updateScreenState(ScreenState.Error(error))
             }
@@ -98,10 +92,17 @@ class HomeViewModel @Inject constructor(
     }
 
     fun clearHistory() {
-        numberFactRepository.clearHistory()
+        viewModelScope.launch {
+            numberFactRepository.clearHistory()
+            _viewState.update { it.copy(needToRefreshData = true) }
+        }
     }
 
     fun onDismissRequest() {
         _viewState.update { it.copy(screenState = ScreenState.Idle) }
+    }
+
+    fun invalidate() {
+        _viewState.update { it.copy(needToRefreshData = false) }
     }
 }

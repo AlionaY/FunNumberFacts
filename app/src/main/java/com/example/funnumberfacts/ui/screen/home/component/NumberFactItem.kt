@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +20,6 @@ import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
 import com.example.funnumberfacts.ui.theme.Melanzane
-import com.example.funnumberfacts.ui.theme.OldLavender
 
 @Composable
 fun NumberFactItem(
@@ -38,7 +37,7 @@ fun NumberFactItem(
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 6.dp),
-            color = Melanzane
+            color = MaterialTheme.colorScheme.tertiary
         )
 
         Text(
@@ -46,13 +45,13 @@ fun NumberFactItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.padding(start = 10.dp),
-            color = Melanzane
+            color = MaterialTheme.colorScheme.tertiary
         )
     }
 
-    Divider(
+    HorizontalDivider(
         modifier = Modifier.fillMaxWidth(),
-        color = OldLavender,
+        color = MaterialTheme.colorScheme.onTertiaryContainer,
         thickness = 1.dp
     )
 }

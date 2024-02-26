@@ -30,7 +30,7 @@ fun FactDetails(fact: NumberFact?, modifier: Modifier = Modifier) {
             text = fact?.number.orInvalidId().toString(),
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.labelLarge,
-            color = Melanzane,
+            color = MaterialTheme.colorScheme.tertiary,
             fontSize = 50.sp,
             textAlign = TextAlign.Center
         )
@@ -40,7 +40,7 @@ fun FactDetails(fact: NumberFact?, modifier: Modifier = Modifier) {
                 .padding(top = 24.dp)
                 .fillMaxWidth(),
             style = MaterialTheme.typography.bodyMedium,
-            color = Melanzane,
+            color = MaterialTheme.colorScheme.tertiary,
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )

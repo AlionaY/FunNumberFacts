@@ -44,11 +44,8 @@ import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.screen.home.bigHistory
 import com.example.funnumberfacts.ui.screen.home.emptyHistory
 import com.example.funnumberfacts.ui.screen.home.smallHistory
-import com.example.funnumberfacts.ui.theme.Bouquet
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
-import com.example.funnumberfacts.ui.theme.OldLavender
-import com.example.funnumberfacts.ui.theme.Thunder
 import com.example.funnumberfacts.util.orInvalidId
 
 private const val HISTORY_ANIMATION_DURATION = 400
@@ -80,7 +77,7 @@ fun FactsHistory(
             modifier = modifier
                 .fillMaxWidth()
                 .border(
-                    border = BorderStroke(1.dp, Bouquet),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary),
                     shape = shape
                 )
                 .shadow(elevation = 2.dp, shape = shape)
@@ -99,7 +96,7 @@ fun FactsHistory(
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.labelMedium,
                         fontSize = 30.sp,
-                        color = Thunder
+                        color = MaterialTheme.colorScheme.outline
                     )
                     TextButton(
                         onClick = onClearHistoryClick,
@@ -109,7 +106,7 @@ fun FactsHistory(
                         Text(
                             text = stringResource(id = R.string.clear_history),
                             style = MaterialTheme.typography.labelMedium,
-                            color = Thunder,
+                            color = MaterialTheme.colorScheme.outline,
                             fontSize = 12.sp
                         )
                     }
@@ -145,7 +142,7 @@ private fun NoHistory(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp),
-            color = OldLavender,
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
             textAlign = TextAlign.Center,
             fontSize = 20.sp,
             style = MaterialTheme.typography.bodyMedium
