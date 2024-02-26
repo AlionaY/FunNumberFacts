@@ -67,8 +67,11 @@ fun FactsHistory(
     onItemClick: (Int) -> Unit,
     onClearHistoryClick: () -> Unit
 ) {
+    val lazyListState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
     val shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
     var isHistoryVisible by remember { mutableStateOf(false) }
+    val showToTopButton by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 0 } }
 
     LaunchedEffect(key1 = Unit) {
         isHistoryVisible = true
@@ -92,7 +95,7 @@ fun FactsHistory(
                 )
                 .shadow(elevation = 2.dp, shape = shape)
                 .background(color = MaterialTheme.colorScheme.onPrimaryContainer, shape = shape),
-            state = rememberLazyListState(),
+            state = lazyListState,
             contentPadding = PaddingValues(horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
@@ -206,36 +209,11 @@ private fun NoHistory(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun EmptyFactsHistoryPreview() {
-    val history = emptyHistory.collectAsLazyPagingItems()
+fun HistoryPreview(
+    @PreviewParameter(HistoryPreviewParameterProvider::class) history: List<FactItem>
+) {
+    val data = flowOf(PagingData.from(history)).collectAsLazyPagingItems()
     FunNumberFactsTheme {
-        FactsHistory(
-            history = history,
-            modifier = Modifier.background(LightGray),
-            onItemClick = {}) {}
-    }
-}
-
-@Preview
-@Composable
-fun SmallFactsHistoryPreview() {
-    val history = smallHistory.collectAsLazyPagingItems()
-    FunNumberFactsTheme {
-        FactsHistory(
-            history = history,
-            modifier = Modifier.background(LightGray),
-            onItemClick = {}) {}
-    }
-}
-
-@Preview
-@Composable
-fun BigFactsHistoryPreview() {
-    val history = bigHistory.collectAsLazyPagingItems()
-    FunNumberFactsTheme {
-        FactsHistory(
-            history = history,
-            modifier = Modifier.background(LightGray),
-            onItemClick = {}) {}
+        FactsHistory(history = data, onItemClick = {}) {}
     }
 }
