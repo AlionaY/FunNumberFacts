@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -17,6 +18,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.funnumberfacts.db.FactItem
 import com.example.funnumberfacts.ui.screen.home.component.FactsHistory
 import com.example.funnumberfacts.ui.screen.home.component.GetFactBlock
+import com.example.funnumberfacts.ui.screen.home.component.HistoryPreviewParameterProvider
 import com.example.funnumberfacts.ui.theme.FunNumberFactsTheme
 import com.example.funnumberfacts.ui.theme.LightGray
 import kotlinx.coroutines.flow.flowOf
@@ -59,63 +61,16 @@ fun HomeScreenContent(
 
 @Preview
 @Composable
-private fun HomeEmptyInputScreenContentPreview() {
-    val history = emptyHistory.collectAsLazyPagingItems()
+private fun HomeEmptyInputScreenContentPreview(
+    @PreviewParameter(HistoryPreviewParameterProvider::class) history: List<FactItem>
+) {
+    val data = flowOf(PagingData.from(history)).collectAsLazyPagingItems()
 
     FunNumberFactsTheme {
         HomeScreenContent(modifier = Modifier.background(LightGray),
             text = "",
             isValidInput = true,
-            history = history,
+            history = data,
             onAction = {})
     }
 }
-
-@Preview
-@Composable
-private fun HomeInvalidInputScreenContentPreview() {
-    val history = smallHistory.collectAsLazyPagingItems()
-
-    FunNumberFactsTheme {
-        HomeScreenContent(modifier = Modifier.background(LightGray),
-            text = "slkjd",
-            isValidInput = false,
-            history = history,
-            onAction = {})
-    }
-}
-
-@Preview
-@Composable
-private fun HomeValidInputScreenContentPreview() {
-    val history = bigHistory.collectAsLazyPagingItems()
-
-    FunNumberFactsTheme {
-        HomeScreenContent(modifier = Modifier.background(LightGray),
-            text = "111",
-            isValidInput = true,
-            history = history,
-            onAction = {})
-    }
-}
-
-val emptyHistory = flowOf(PagingData.from(emptyList<FactItem>()))
-val smallHistory = flowOf(
-    PagingData.from(
-        listOf(
-            FactItem(
-                id = 0,
-                number = 2,
-                text = "2 is the number of stars in a binary star system (a stellar system consisting of two stars orbiting around their center of mass). "
-            ),
-            FactItem(
-                id = 1, number = 20, text = "20 is the number of stars "
-            ),
-        )
-    )
-)
-val bigHistory = flowOf(PagingData.from(List(15) {
-    FactItem(
-        id = 0, number = 3, text = "3 is the number of words or phrases in a Tripartite motto."
-    )
-}))
